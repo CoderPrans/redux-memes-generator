@@ -7,7 +7,9 @@ import Editor from './components/Editor';
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">MEME GENERATOR</div>
+      <div className="App">
+        <h1 style={{fontWeight: 'normal'}}> MEME GENERATOR </h1>
+        </div>
         <Home />
         <Editor />
     </Provider>

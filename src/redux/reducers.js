@@ -4,7 +4,8 @@ import {combineReducers} from 'redux';
 const initialState = {
   memes: [],
   loading: false,
-  error: null
+  error: null,
+  page: 1
 };
 
 function memes(state = initialState, action) {
@@ -19,7 +20,7 @@ function memes(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        memes: action.memes
+        memes: action.memes      
       }
     case type.GET_MEMES_FAILED:
       return {
@@ -32,6 +33,23 @@ function memes(state = initialState, action) {
   }
 };
 
-const rootReducer = combineReducers({memes});
+function pagination(state = initialState, action) {
+  switch(action.type) {
+    case type.INC_PAGE:
+      return {
+        ...state,
+        page: action.payload
+      }
+    case type.DEC_PAGE:
+      return {
+        ...state,
+        page: action.payload
+      }
+    default:
+      return state;
+  }
+}
+
+const rootReducer = combineReducers({memes, pagination});
 
 export default rootReducer;
