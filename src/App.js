@@ -2,16 +2,20 @@ import './App.css';
 import {Provider} from 'react-redux';
 import store from './redux/store';
 import Home from './components/Home';
-import Editor from './components/Editor';
 
 function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <h1 style={{fontWeight: 'normal'}}> MEME GENERATOR </h1>
+        <h1> MEME GENERATOR </h1>
         </div>
         <Home />
-        <Editor />
+          <style jsx="true">{`
+            h1 {
+              font-weight: normal;
+              font-family: 'Patrick Hand', cursive;
+            }
+          `}</style>
     </Provider>
   );
 }

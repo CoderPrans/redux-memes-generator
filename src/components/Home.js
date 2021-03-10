@@ -2,6 +2,7 @@ import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {getMemes, incPage, decPage} from '../redux/actions';
 import Templates from './Templates';
+import Editor from './Editor';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -9,6 +10,7 @@ const Home = () => {
   const loading = useSelector(state => state.memes.loading);
   const error = useSelector(state => state.memes.error);
   const page = useSelector(state => state.pagination.page);
+  const toEdit = useSelector(state => state.editor.editing);
 
   useEffect(() => {
     dispatch(getMemes());
@@ -21,8 +23,8 @@ const Home = () => {
     return (
       <>
         <div className="wrapper">
-          {memes.data.memes.slice((page-1)*12, page*12).map(m => (
-            <Templates m={m} key={m.id} />
+          {memes.data.memes.slice((page-1)*12, page*12).map((m, i) => (
+            <Templates m={m} i={i} key={m.id} />
           ))}
             <div className="buttons">
               <button onClick={() => dispatch(decPage(page))}
@@ -37,6 +39,7 @@ const Home = () => {
                 Next Page
               </button>
             </div>
+            {toEdit!==null && <Editor meme={memes.data.memes[(page-1)*12+toEdit]} />}
         </div>
         <style jsx="true">{`
           .wrapper {
@@ -51,12 +54,13 @@ const Home = () => {
             margin: 0 auto;
           }
           button {
-            background: #eee;
+            background: #fefefe;
             padding: 5px 10px;
-            border: 1px solid #666;
+            border: none;
             margin: 20px 10px;
             border-radius: 3px;
             cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
           }
         `}</style>
       </>

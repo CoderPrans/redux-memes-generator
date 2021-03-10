@@ -5,7 +5,8 @@ const initialState = {
   memes: [],
   loading: false,
   error: null,
-  page: 1
+  page: 1,
+  editing: null
 };
 
 function memes(state = initialState, action) {
@@ -50,6 +51,23 @@ function pagination(state = initialState, action) {
   }
 }
 
-const rootReducer = combineReducers({memes, pagination});
+function editor(state = initialState, action) {
+  switch(action.type) {
+    case type.EDIT_MEME:
+      return {
+        ...state,
+        editing: action.payload
+      }
+    case type.CLOSE_EDITOR:
+      return {
+        ...state,
+        editing: null
+      }
+    default:
+      return state;
+  }
+}
+
+const rootReducer = combineReducers({memes, pagination, editor});
 
 export default rootReducer;

@@ -19,3 +19,16 @@ export function decPage(page) {
     payload: page - 1
   }
 }
+
+export function editMeme(id) {
+  return {
+    type: type.EDIT_MEME,
+    payload: id
+  }
+}
+
+export function closeEditor() {
+  return {
+    type: type.CLOSE_EDITOR
+  }
+}
