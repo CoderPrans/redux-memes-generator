@@ -23,6 +23,18 @@ const modalStyle = `
       color: white;
       font-weight: bold;
     }
+    @media screen and (max-width: 400px) {
+      .editor-modal {
+        max-height: 500px;
+        overflow: auto;
+      }
+    }
+    @media screen and (min-width: 400px) {
+      .img-wrapper {
+        max-height: 500px;
+        overflow: auto;
+      }
+    }
 `;
 
 const Editor = ({meme}) => {
@@ -60,7 +72,9 @@ const Editor = ({meme}) => {
     <div className="editor-modal">
       <a rel="noreferrer" href={response.data.url} target="_blank">Uploaded!! Check it out</a>
         <br />
+          <div className="img-wrapper">
        <img alt={meme.name} width={280} src={response.data.url} />
+         </div>
       <button className="close-btn" onClick={() => dispatch(closeEditor())}>X</button>
      </div>
         <style jsx="true">{modalStyle}</style>
@@ -88,7 +102,9 @@ return (
       {meme.name}
     </span>
       <div className="editor">
-        <img alt={meme.name} src={meme.url} width={330} />
+        <div className="img-wrapper">
+        <img alt={meme.name} src={meme.url} width={280} />
+          </div>
           <form className="form" onSubmit={e => handleSubmit(e)}>
             {new Array(meme.box_count).fill(0).map((b,i) => (
               <input key={i} name={`text${i}`} placeholder={`text${i}`} required />

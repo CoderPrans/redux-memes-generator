@@ -50,12 +50,13 @@ const Home = () => {
             padding: 10px;
           }
           .buttons {
-            width: 220px;
+            width: 240px;
             margin: 0 auto;
           }
           button {
             background: #fefefe;
             padding: 5px 10px;
+            font-size: 16px;
             border: none;
             margin: 20px 10px;
             border-radius: 3px;
