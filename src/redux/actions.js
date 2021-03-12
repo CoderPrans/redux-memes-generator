@@ -32,3 +32,10 @@ export function closeEditor() {
     type: type.CLOSE_EDITOR
   }
 }
+
+export function submitCaption(formdata) {
+  return {
+    type: type.SUBMIT_CAPTION,
+    payload: formdata
+  }
+}

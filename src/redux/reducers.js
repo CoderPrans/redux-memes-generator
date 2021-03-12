@@ -6,7 +6,10 @@ const initialState = {
   loading: false,
   error: null,
   page: 1,
-  editing: null
+  editing: null,
+  uploading: false,
+  uploadError: null,
+  response: null,
 };
 
 function memes(state = initialState, action) {
@@ -56,12 +59,32 @@ function editor(state = initialState, action) {
     case type.EDIT_MEME:
       return {
         ...state,
-        editing: action.payload
+        editing: action.payload,
       }
     case type.CLOSE_EDITOR:
       return {
         ...state,
-        editing: null
+        editing: null,
+        uploading: false,
+        response: null,
+        uploadError: null
+      }
+    case type.SUBMIT_CAPTION:
+      return {
+        ...state,
+        uploading: true,
+      }
+    case type.SUBMIT_CAPTION_SUCCESS:
+      return {
+        ...state,
+        uploading: false,
+        response: action.response
+      }
+    case type.SUBMIT_CAPTION_FAILURE:
+      return {
+        ...state,
+        uploading: false,
+        uploadError: action.response
       }
     default:
       return state;
