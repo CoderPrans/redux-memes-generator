@@ -5,9 +5,18 @@ import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = compose(
-  applyMiddleware(sagaMiddleware),
-)(createStore)(rootReducer);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const middlewares = [sagaMiddleware];
+
+// const store = compose(
+//   applyMiddleware(sagaMiddleware),
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// )(createStore)(rootReducer);
+//
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(...middlewares))
+);
 
 sagaMiddleware.run(rootSaga);
 
